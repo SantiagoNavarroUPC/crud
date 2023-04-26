@@ -19,7 +19,7 @@ class _ListPetsState extends State<ListPets> {
     int petId;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Mascotas'),
+        title: const Text('Lista de Mis Mascotas'),
         backgroundColor: Colors.blue.shade800,
         actions: [
           IconButton(
@@ -34,7 +34,7 @@ class _ListPetsState extends State<ListPets> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
-        itemCount: controlp.listaPetsFinal!.length,
+        itemCount: controlp.listaPetsFinal1!.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(2),
@@ -50,17 +50,17 @@ class _ListPetsState extends State<ListPets> {
                     CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.06,
                       backgroundImage:
-                          NetworkImage(controlp.listaPetsFinal![index].foto),
+                          NetworkImage(controlp.listaPetsFinal1![index].foto),
                     ),
                     SizedBox(height: 5),
                     Text(
-                      controlp.listaPetsFinal![index].nombre,
+                      controlp.listaPetsFinal1![index].nombre,
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      controlp.listaPetsFinal![index].raza,
+                      controlp.listaPetsFinal1![index].raza,
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
@@ -71,11 +71,11 @@ class _ListPetsState extends State<ListPets> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              petId = controlp.listaPetsFinal![index].id;
+                              petId = controlp.listaPetsFinal1![index].id;
                               print(petId);
                               Navigator.pushNamed(context, '/modificarPets',
                                   arguments: petId);
-                              controlp.listaPetsFinal!.removeAt(index);
+                              controlp.listaPetsFinal1!.removeAt(index);
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.blue.shade800,
@@ -103,8 +103,8 @@ class _ListPetsState extends State<ListPets> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pushNamed(context, '/agregarPets');
-                              controlp
-                                  .eliminar(controlp.listaPetsFinal![index].id);
+                              controlp.eliminar(
+                                  controlp.listaPetsFinal1![index].id);
                               Get.snackbar('Mascota',
                                   controlp.listaMensajes1![0].mensaje,
                                   duration: const Duration(seconds: 2),

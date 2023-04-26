@@ -94,7 +94,7 @@ class Login extends StatelessWidget {
                             } else {
                               controlp
                                   .listar()
-                                  .then((value) => Get.toNamed("/listaPets"));
+                                  .then((value) => Get.toNamed("/listaMenu"));
                             }
                           });
                         },

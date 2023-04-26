@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../domain/controller/controllerUser.dart';
+
 class RegisterPets extends StatelessWidget {
   const RegisterPets({Key? key});
 
   @override
   Widget build(BuildContext context) {
     ControlPets controlp = Get.find();
+    ControlUser controlu = Get.find();
     final nombre = TextEditingController();
     final raza = TextEditingController();
     final foto = TextEditingController();
@@ -63,8 +66,10 @@ class RegisterPets extends StatelessWidget {
                         child: IconButton(
                           color: Colors.white,
                           onPressed: () {
+                            int iduser = controlu.listaUserLogin![0].id;
                             controlp
-                                .crearPets(foto.text, nombre.text, raza.text)
+                                .crearPets(
+                                    foto.text, nombre.text, raza.text, iduser)
                                 .then((value) {
                               Get.snackbar(
                                   'Mascota', controlp.listaMensajes![0].mensaje,
@@ -75,7 +80,7 @@ class RegisterPets extends StatelessWidget {
                                       Color.fromARGB(255, 21, 101, 192));
                               controlp
                                   .listar()
-                                  .then((value) => Get.toNamed("/listaPets"));
+                                  .then((value) => Get.toNamed("/listaMenu"));
                             });
                           },
                           icon: const Icon(Icons.arrow_forward),
@@ -139,12 +144,13 @@ class RegisterPets extends StatelessWidget {
                     children: [
                       TextButton(
                         onPressed: () {
+                          int iduser = controlu.listaUserLogin![0].id;
                           controlp
                               .listar()
-                              .then((value) => Get.toNamed("/listaPets"));
+                              .then((value) => Get.toNamed("/listaMenu"));
                         },
                         child: const Text(
-                          'Ver lista',
+                          'Ver lista mascotas',
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 18,

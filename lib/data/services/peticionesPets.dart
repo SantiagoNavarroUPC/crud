@@ -11,19 +11,29 @@ class PeticionesPets {
         "https://proyectoprogramcionmobil.000webhostapp.com/Api-Movil/listar.php");
 
     final response = await http.get(url);
-
-    print(response.statusCode);
-    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 
+  static Future<List<Pets>> listarU(int iduser) async {
+    var url = Uri.parse(
+        "https://proyectoprogramcionmobil.000webhostapp.com/Api-Movil/listarPetsUsers.php");
+
+    final response = await http.post(url, body: {'iduser': iduser.toString()});
+
+    return compute(convertirAlista5, response.body);
+  }
+
   static Future<List<Mensajes>> registrarPets(
-      String foto, String nombre, String raza) async {
+      String foto, String nombre, String raza, int iduser) async {
     var url = Uri.parse(
         "https://proyectoprogramcionmobil.000webhostapp.com/Api-Movil/agregarPets.php");
 
-    final response = await http
-        .post(url, body: {'foto': foto, 'nombre': nombre, 'raza': raza});
+    final response = await http.post(url, body: {
+      'foto': foto,
+      'nombre': nombre,
+      'raza': raza,
+      'iduser': iduser.toString()
+    });
 
     print(response.statusCode);
     print(response.body);
@@ -58,15 +68,11 @@ class PeticionesPets {
 
   static List<Mensajes> convertirAlista(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    print(pasar);
-    print(pasar[0]['mensaje']);
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson1(json)).toList();
   }
 
   static List<Mensajes> convertirAlista3(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    print(pasar);
-    print(pasar[0]['mensaje']);
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson2(json)).toList();
   }
 
@@ -75,10 +81,13 @@ class PeticionesPets {
     return pasar.map<Pets>((json) => Pets.desdeJson(json)).toList();
   }
 
+  static List<Pets> convertirAlista5(String responsebody) {
+    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
+    return pasar.map<Pets>((json) => Pets.desdeJson(json)).toList();
+  }
+
   static List<Mensajes> convertirAlista4(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    print(pasar);
-    print(pasar[0]['mensaje']);
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson3(json)).toList();
   }
 }

@@ -2,6 +2,7 @@ import 'package:crud_http/ui/auth/login.dart';
 import 'package:crud_http/ui/auth/register.dart';
 import 'package:crud_http/ui/content/pets/agregarPets.dart';
 import 'package:crud_http/ui/content/pets/listPets.dart';
+import 'package:crud_http/ui/content/pets/listaMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +26,7 @@ class App extends StatelessWidget {
         "/modificarPets": (context) => const ModifyPets(
               petId: 1,
             ),
+        "/listaMenu": (context) => const ListMenu(),
       },
     );
   }

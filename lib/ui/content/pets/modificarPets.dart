@@ -142,7 +142,7 @@ class ModifyPets extends StatelessWidget {
                         onPressed: () {
                           controlp
                               .listar()
-                              .then((value) => Get.toNamed("/listaPets"));
+                              .then((value) => Get.toNamed("/listaMenu"));
                         },
                         child: const Text(
                           'Ver lista',
